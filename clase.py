@@ -3,6 +3,12 @@ from tkinter import messagebox, ttk, simpledialog
 import jaydebeapi
 import pickle
 import atexit
+import os
+
+DERBY_CLIENT_JAR = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)),
+    'db-derby-10.17.1.0-bin', 'lib', 'derbyclient.jar'
+)
 
 class SQLDeveloperEmulator:
     def __init__(self, root):
@@ -1359,7 +1365,7 @@ class SQLDeveloperEmulator:
 #DATABASE-OPERATIONS
     def get_schemas(self, connection_info):
         try:
-            jdbc_driver = '/Users/coleexz/Documents/GitHub/ApacheDerbyDBMS/db-derby-10.17.1.0-bin/lib/derbyclient.jar'
+            jdbc_driver = DERBY_CLIENT_JAR
             driver_class = 'org.apache.derby.client.ClientAutoloadedDriver'
 
             db_url = f'jdbc:derby://{connection_info["hostname"]}:{connection_info["port"]}/{connection_info["sid"]};create=true'
@@ -1405,7 +1411,7 @@ class SQLDeveloperEmulator:
             return
         connection_info = self.connections[self.selected_connection]
         try:
-            jdbc_driver = '/Users/coleexz/Documents/GitHub/ApacheDerbyDBMS/db-derby-10.17.1.0-bin/lib/derbyclient.jar'
+            jdbc_driver = DERBY_CLIENT_JAR
             driver_class = 'org.apache.derby.client.ClientAutoloadedDriver'
             db_url = f'jdbc:derby://{connection_info["hostname"]}:{connection_info["port"]}/{connection_info["sid"]};create=true;currentSchema={connection_info.get("schema")}'
             conn = jaydebeapi.connect(driver_class, db_url, [connection_info["username"], connection_info["password"]], jdbc_driver)
@@ -1425,7 +1431,7 @@ class SQLDeveloperEmulator:
             return
         connection_info = self.connections[self.selected_connection]
         try:
-            jdbc_driver = '/Users/coleexz/Documents/GitHub/ApacheDerbyDBMS/db-derby-10.17.1.0-bin/lib/derbyclient.jar'
+            jdbc_driver = DERBY_CLIENT_JAR
             driver_class = 'org.apache.derby.client.ClientAutoloadedDriver'
             db_url = f'jdbc:derby://{connection_info["hostname"]}:{connection_info["port"]}/{connection_info["sid"]};create=true;currentSchema={connection_info.get("schema")}'
             conn = jaydebeapi.connect(driver_class, db_url, [connection_info["username"], connection_info["password"]], jdbc_driver)
@@ -1519,7 +1525,7 @@ class SQLDeveloperEmulator:
 
     def test_connection(self, hostname, port, sid, username, password):
         try:
-            jdbc_driver = '/Users/coleexz/Documents/GitHub/ApacheDerbyDBMS/db-derby-10.17.1.0-bin/lib/derbyclient.jar'
+            jdbc_driver = DERBY_CLIENT_JAR
             driver_class = 'org.apache.derby.client.ClientAutoloadedDriver'
             db_url = f'jdbc:derby://{hostname}:{port}/{sid};create=true'
             conn = jaydebeapi.connect(driver_class, db_url, [username, password], jdbc_driver)
@@ -1575,7 +1581,7 @@ class SQLDeveloperEmulator:
 
             try:
                 # Intentamos realizar la conexión
-                jdbc_driver = '/Users/coleexz/Documents/GitHub/ApacheDerbyDBMS/db-derby-10.17.1.0-bin/lib/derbyclient.jar'
+                jdbc_driver = DERBY_CLIENT_JAR
                 driver_class = 'org.apache.derby.client.ClientAutoloadedDriver'
                 db_url = f'jdbc:derby://{connection_info.get("hostname")}:{connection_info.get("port")}/{connection_info.get("sid")};create=true'
                 self.conn = jaydebeapi.connect(driver_class, db_url, [connection_info["username"], connection_info["password"]], jdbc_driver)
@@ -1594,7 +1600,7 @@ class SQLDeveloperEmulator:
 
     def connect_to_database(self, connection_info):
         try:
-            jdbc_driver = '/Users/coleexz/Documents/GitHub/ApacheDerbyDBMS/db-derby-10.17.1.0-bin/lib/derbyclient.jar'
+            jdbc_driver = DERBY_CLIENT_JAR
             driver_class = 'org.apache.derby.client.ClientAutoloadedDriver'
             db_url = f'jdbc:derby://{connection_info.get("hostname")}:{connection_info.get("port")}/{connection_info.get("sid")};create=true'
 
